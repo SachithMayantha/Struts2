@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="example" namespace="/example" extends="struts-default">
+        <action name="HelloWorld" class="com.example.action.LoginAction">
+            <result>/example/HelloWorld.jsp</result>
+        </action>
+        <action name="login" class="com.example.action.LoginAction" method="loginUser">
+            <result name="loginsuccess" type="redirect">list.action</result>
+            <result name="loginerror">/error.jsp</result>
+        </action>
+        <action name="list" class="com.example.action.UserAction" method="listUser">
+            <result name="listuser">/listUser.jsp</result>
+        </action>
+        <action name="delete" class="com.example.action.UserAction" method="deleteUser">
+            <result name="deleteuser" type="redirect">list.action</result>
+        </action>
+        <action name="new" class="com.example.action.UserAction" method="newForm">
+            <result name="newform">/form.jsp</result>
+        </action>
+        <action name="insert" class="com.example.action.UserAction" method="insertUser">
+            <result name="adduser" type="redirect">list.action</result>
+        </action>
+        <action name="edit" class="com.example.action.UserAction" method="showEditForm">
+            <result name="editform">/update.jsp</result>
+        </action>
+        <action name="update" class="com.example.action.UserAction" method="updateUser">
+            <result name="updateuser" type="redirect">list.action</result>
+        </action>
+    </package>
+</struts>
+
