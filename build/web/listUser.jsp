@@ -14,8 +14,9 @@
     </head>
     <body>
         <h1>User List</h1>
-        <a href="new">New User</a>
-        <table class="table table-bordered" action="list">
+        &nbsp;&nbsp;&nbsp;<a href="new">New User</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="logout">Logout</a>
+        <table action="list">
             <thead>
                 <tr>
                     <th>ID</th>

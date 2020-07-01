@@ -27,43 +27,40 @@ import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
-/**
- * <code>Set welcome message.</code>
- */
+
 public class LoginAction extends ActionSupport {
 
     public LoginAction() {
     }
-    
+
     @Override
-    public String execute(){
+    public String execute() {
         return SUCCESS;
     }
-   
+
     public String loginUser() {
-   
-        try{
-        User user = new User();
-            
-        HttpServletRequest request = ServletActionContext.getRequest();
-  
-        System.out.println("loginUser() method called in UserAction");
-        user.setUsername(request.getParameter("username"));
-        user.setPassword(request.getParameter("password"));
+        try {
+            User user = new User();
 
-        user = UserDAO.login(user);
+            HttpServletRequest request = ServletActionContext.getRequest();
 
-        if (user.isValid()) {
-            System.out.println("In UserAction class if else working");
-            //create a session
-            HttpSession session = request.getSession(true);
-            //assign the object to currentSessionUser
-            session.setAttribute("user", user);
-            return "loginsuccess";
-        } else {
-            return "loginerror"; 
-        }
-        }catch(Exception e){
+            System.out.println("loginUser() method called in UserAction");
+            user.setUsername(request.getParameter("username"));
+            user.setPassword(request.getParameter("password"));
+
+            user = UserDAO.login(user);
+
+            if (user.isValid()) {
+                System.out.println("In UserAction class if else working");
+                //create a session
+                HttpSession session = request.getSession(true);
+                //assign the object to currentSessionUser
+                session.setAttribute("user", user);
+                return "loginsuccess";
+            } else {
+                return "loginerror";
+            }
+        } catch (Exception e) {
             return "";
         }
     }
