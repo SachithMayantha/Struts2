@@ -17,28 +17,14 @@
             <result name="listuser">/listUser.jsp</result>
             <result name="hello">/example/HelloWorld.jsp</result>
         </action>
-        <action name="delete" class="com.example.action.UserAction" method="deleteUser">
+       <action name="*" class="com.example.action.UserAction" method="{1}User">
             <result name="deleteuser" type="redirect">list.action</result>
-            <result name="hello">/example/HelloWorld.jsp</result>
-        </action>
-        <action name="new" class="com.example.action.UserAction" method="newForm">
             <result name="newform">/form.jsp</result>
-            <result name="hello">/example/HelloWorld.jsp</result>
-        </action>
-        <action name="insert" class="com.example.action.UserAction" method="insertUser">
             <result name="insertuser" type="redirect">list.action</result>
-            <result name="hello">/example/HelloWorld.jsp</result>
-        </action>
-        <action name="edit" class="com.example.action.UserAction" method="showEditForm">
             <result name="editform">/update.jsp</result>
-            <result name="hello">/example/HelloWorld.jsp</result>
-        </action>
-        <action name="update" class="com.example.action.UserAction" method="updateUser">
             <result name="updateuser" type="redirect">list.action</result>
-            <result name="hello">/example/HelloWorld.jsp</result>
-        </action>
-        <action name="logout" class="com.example.action.UserAction" method="logoutUser">
             <result name="logoutuser">/example/HelloWorld.jsp</result>
+            <result name="hello">/example/HelloWorld.jsp</result>
         </action>
     </package>
 </struts>

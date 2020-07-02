@@ -5,6 +5,7 @@
  */
 package com.example;
 
+import com.example.bean.UserInputBean;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -135,7 +136,7 @@ public class UserDAO {
         return rowDeleted;
     }
 
-    public void insertUser(User user) throws SQLException {
+    public void insertUser(UserInputBean inputBean) throws SQLException {
         EncodeDecode ed = new EncodeDecode();
         String encoded;
         // Establishing a connection
@@ -143,30 +144,31 @@ public class UserDAO {
             currentCon = ConnectionManager.getConnection();
             // create a statement using connection object
             PreparedStatement prepareStatement = currentCon.prepareStatement(INSERT_USERS_SQL);
-            encoded = ed.encode(user.getPassword());
-            prepareStatement.setInt(1, user.getId());
-            prepareStatement.setString(2, user.getUsername());
+            encoded = ed.encode(inputBean.getPassword());
+            prepareStatement.setInt(1, Integer.parseInt(inputBean.getId()));
+            prepareStatement.setString(2, inputBean.getUsername());
             prepareStatement.setString(3, encoded);
-            prepareStatement.setString(4, user.getDepartment());
+            prepareStatement.setString(4, inputBean.getDepartment());
             prepareStatement.setBoolean(5, true);
             prepareStatement.executeUpdate();
         } catch (SQLException e) {
         }
 
+
     }
 
-    public void updateUser(User user) throws SQLException {
+    public void updateUser(UserInputBean inputBean) throws SQLException {
         PreparedStatement statement = null;
         // Establishing a connection
         try {
             Connection connection = ConnectionManager.getConnection();
             // create a statement using connection object
             statement = connection.prepareStatement(UPDATE_USERS_SQL);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getDepartment());
+            statement.setString(1, inputBean.getUsername());
+            statement.setString(2, inputBean.getPassword());
+            statement.setString(3, inputBean.getDepartment());
             statement.setBoolean(4, true);
-            statement.setInt(5, user.getId());
+            statement.setInt(5, Integer.parseInt(inputBean.getId()));
             // updating
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -174,29 +176,50 @@ public class UserDAO {
         }
         System.out.println("updateUser() over");
     }
+
     public User selectUser(int id) {
-		User user = null;
-		// Establish the connection
-		try {
-			Connection connection = ConnectionManager.getConnection();
-			// create a statement using connection object
-			PreparedStatement prepareStatement = connection.prepareStatement(SELECT_USER_BY_ID);
-			prepareStatement.setInt(1, id);
-			System.out.println(prepareStatement);
-			// execute the query
-			ResultSet rs = prepareStatement.executeQuery();
+        User user = null;
+        // Establish the connection
+        try {
+            Connection connection = ConnectionManager.getConnection();
+            // create a statement using connection object
+            PreparedStatement prepareStatement = connection.prepareStatement(SELECT_USER_BY_ID);
+            prepareStatement.setInt(1, id);
+            System.out.println(prepareStatement);
+            // execute the query
+            ResultSet rs = prepareStatement.executeQuery();
 
-			// Process the result set object
-			while (rs.next()) {
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				String department = rs.getString("department");
-				user = new User(id, username, password, department);
-			}
-		} catch (SQLException e) {
-		}
-		return user;
+            // Process the result set object
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String department = rs.getString("department");
+                user = new User(id, username, password, department);
+            }
+        } catch (SQLException e) {
+        }
+        return user;
 
-	}
+    }
+
+    public void insertUserTest(UserInputBean inputBean) throws SQLException {
+        EncodeDecode ed = new EncodeDecode();
+        String encoded;
+        // Establishing a connection
+        try {
+            currentCon = ConnectionManager.getConnection();
+            // create a statement using connection object
+            PreparedStatement prepareStatement = currentCon.prepareStatement(INSERT_USERS_SQL);
+            encoded = ed.encode(inputBean.getPassword());
+            prepareStatement.setInt(1, Integer.parseInt(inputBean.getId()));
+            prepareStatement.setString(2, inputBean.getUsername());
+            prepareStatement.setString(3, encoded);
+            prepareStatement.setString(4, inputBean.getDepartment());
+            prepareStatement.setBoolean(5, true);
+            prepareStatement.executeUpdate();
+        } catch (SQLException e) {
+        }
+
+    }
 
 }

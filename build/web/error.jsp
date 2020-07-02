@@ -12,6 +12,7 @@
         <title>Error!</title>
     </head>
     <body>
-        <h1>Username or Password Error!Please try again</h1>
+        <br><br><br>
+        <h1><center>Username or Password Error!Please try again</center></h1>
     </body>
 </html>

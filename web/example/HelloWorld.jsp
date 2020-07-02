@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        <br>
         <s:form action="login">
             <s:textfield name="username" label="UserName"></s:textfield>
             <s:password name="password" label="Password" type="password"></s:password>
